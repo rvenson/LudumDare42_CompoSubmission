@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if(other.CompareTag("Player")){
 			other.GetComponentInParent<Character>().Damage(3);
+			AudioManager.instance.PlayFX("explosion01");
 			Destroy(gameObject);
 		}
 	}

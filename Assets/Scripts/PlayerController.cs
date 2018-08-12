@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
 	public static PlayerController instance;
 	public PlayerCharacter character;
+	public PlayerAnimation playerAnimation;
 
 	public Transform holder;
 	float speed = 0.1f;
@@ -40,6 +41,9 @@ public class PlayerController : MonoBehaviour {
 
 	void Movement(){
 		gameObject.transform.position += movement;
+		if(movement.magnitude > 0f){
+			gameObject.transform.rotation = Quaternion.LookRotation(movement);
+		}
 	}
 
 	void Action(){
@@ -49,6 +53,8 @@ public class PlayerController : MonoBehaviour {
 				if(holdBlock == null){
 					Slot slot = actualTrigger.GetComponent<Slot>();
 					if(slot.blockLoaded != null){
+						playerAnimation.Up();
+						AudioManager.instance.PlayFX("put02");
 						slot.blockLoaded.transform.SetParent(holder);
 						slot.blockLoaded.transform.localPosition = new Vector3(0, 0, 0);
 						holdBlock = slot.blockLoaded;
@@ -57,6 +63,8 @@ public class PlayerController : MonoBehaviour {
 				} else {
 					Slot slot = actualTrigger.GetComponent<Slot>();
 					if(slot.blockLoaded == null){
+						playerAnimation.Down();
+						AudioManager.instance.PlayFX("put01");
 						holdBlock.transform.SetParent(actualTrigger.transform);
 						holdBlock.transform.localPosition = new Vector3(0, 1.4f, 0);
 						slot.blockLoaded = holdBlock;

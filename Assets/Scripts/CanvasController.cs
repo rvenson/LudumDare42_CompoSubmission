@@ -24,6 +24,13 @@ public class CanvasController : MonoBehaviour {
 		pcPanel.gameObject.SetActive(false);
 	}
 
+	void Update(){
+		if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)){
+			CanvasController.instance.pausePanel.SetActive(!LevelManager.instance.gamePause);
+			Pause(!LevelManager.instance.gamePause);
+		}
+	}
+
 	public void EndLevel(bool win){
 		
 		messagePanel.gameObject.SetActive(false);
@@ -39,6 +46,19 @@ public class CanvasController : MonoBehaviour {
 	public void StartLevel(){
 		startScreen.SetActive(false);
 		pcPanel.gameObject.SetActive(true);
+	}
+
+	public void MainMenu(){
+		LevelManager.instance.MainMenu();
+	}
+
+	public void RestartLevel(){
+		LevelManager.instance.RestartLevel();
+	}
+
+	public void Pause(bool pause){
+		LevelManager.instance.PauseGame(pause);
+		pausePanel.SetActive(pause);
 	}
 	
 }

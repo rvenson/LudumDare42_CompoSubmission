@@ -12,10 +12,13 @@ public class LevelManager : MonoBehaviour {
 	public Memory ram;
 	public ApplicationModel[] appList;
 	ApplicationModel foregroundApp = null;
-	bool gamePause = false;
+	public bool gamePause = false;
 	bool gameStarted = false;
 	public bool gameFinished = false;
-	int appIndex = 0;
+	protected int appIndex = 0;
+
+	public bool dangerousZone = false;
+	public bool runApplication = false;
 
 	void Awake(){
 		if(instance == null){
@@ -31,7 +34,8 @@ public class LevelManager : MonoBehaviour {
 		PauseGame(true);
 	}
 
-	IEnumerator OpenApp(ApplicationModel app, float delay = 0){
+	protected IEnumerator OpenApp(ApplicationModel app, float delay = 0){
+		foregroundApp = null;
 		CanvasController.instance.messagePanel.AddMessage("Loading " + app.appName 
 		+ "(" + app.size + " Blocks)", true);
 		yield return new WaitForSeconds(delay);
@@ -39,6 +43,8 @@ public class LevelManager : MonoBehaviour {
 		gamePause = false;
 		CanvasController.instance.pcPanel.SetMainMemory(ram);
 		CanvasController.instance.pcPanel.SetActualApplication(foregroundApp);
+
+		CanvasController.instance.pcPanel.gameObject.SetActive(true);
 
 		yield return null;
 	}
@@ -54,9 +60,9 @@ public class LevelManager : MonoBehaviour {
 			gameStarted = true;
 		}
 
-		if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)){
-			CanvasController.instance.pausePanel.SetActive(!gamePause);
-			PauseGame(!gamePause);
+		if(foregroundApp != null && !dangerousZone && foregroundApp.waitTime < 6f){
+			dangerousZone = true;
+			AudioManager.instance.PlayFX("clock01");
 		}
 	}
 
@@ -75,24 +81,31 @@ public class LevelManager : MonoBehaviour {
 			//Debug.Log("usetime: " + foregroundApp.useTime + " / waitTime: " + foregroundApp.waitTime + " / Blocks: " + ram.GetLoadedBlocks(foregroundApp.appName));
 			
 			if(ram.GetLoadedBlocks(foregroundApp.appName) >= foregroundApp.size){
+				if(!runApplication){
+					AudioManager.instance.PlayFX("load01");
+					runApplication = true;
+				}
 				foregroundApp.useTime -= Time.fixedDeltaTime;
 			} else {
+				runApplication = false;
 				foregroundApp.waitTime -= Time.fixedDeltaTime;
 			}
 
 			if(foregroundApp.waitTime < 0){
 				LossCondition();
 			} else if (foregroundApp.useTime < 0){
+				Debug.Log("rst");
+				gamePause = true;
 				NextApp();
 			}
 		}
 	}
 
-	void NextApp(){
-		Debug.Log("next");
-		gamePause = true;
+	protected virtual void NextApp(){
+		AudioManager.instance.PlayFX("sucess01");
 		appIndex++;
 		if(appIndex < appList.Length){
+			CanvasController.instance.pcPanel.gameObject.SetActive(false);
 			StartCoroutine(OpenApp(appList[appIndex], 3f));
 		} else {
 			WinCondition();
@@ -100,14 +113,15 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void LossCondition(){
-		Debug.Log("Voce perdeu");
+		Debug.Log("You lost!");
+		AudioManager.instance.PlayFX("fallen01");
 		PauseGame(true);
 		CanvasController.instance.EndLevel(false);
 		gameFinished = true;
 	}
 
 	public void WinCondition(){
-		Debug.Log("Você ganhou");
+		Debug.Log("You win!");
 		PauseGame(true);
 		CanvasController.instance.EndLevel(true);
 		gameFinished = true;

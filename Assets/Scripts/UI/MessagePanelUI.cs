@@ -6,13 +6,32 @@ using UnityEngine.UI;
 public class MessagePanelUI : MonoBehaviour {
 
 	public GameObject messageBar;
+	public GameObject dialogBar;
+	public Text dialogText;
 	public Text messageText;
+	public RawImage dialogImage;
 	bool inUse = false;
+	bool inDialog = false;
 	Queue<string> messageQueue = new Queue<string>();
 
 	void Start(){
 		messageBar.SetActive(false);
 		messageText.text = "";
+	}
+
+	void Update(){
+		if(inDialog && Input.GetButtonDown("Jump")){
+			dialogBar.SetActive(false);
+			LevelManager.instance.PauseGame(false);
+			inDialog = false;
+		}
+	}
+
+	public void AddDialog(string message){
+		dialogText.text = message;
+		dialogBar.SetActive(true);
+		LevelManager.instance.PauseGame(true);
+		inDialog = true;
 	}
 
 	public void AddMessage(string message, bool showNow){
