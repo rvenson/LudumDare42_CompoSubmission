@@ -10,6 +10,9 @@ public class EnemyController : MonoBehaviour {
 
 	void Awake(){
 		_nav = GetComponent<NavMeshAgent>();
+		if(target == null){
+			target = PlayerController.instance.gameObject.transform;
+		}
 	}
 
 	void FixedUpdate(){
@@ -19,9 +22,9 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		Debug.Log("enter");
 		if(other.CompareTag("Player")){
 			other.GetComponentInParent<Character>().Damage(3);
+			Destroy(gameObject);
 		}
 	}
 

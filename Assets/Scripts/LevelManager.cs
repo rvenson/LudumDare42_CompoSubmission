@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour {
 
 	public static LevelManager instance;
+	public string levelName = "Level00";
+	public string nextLevelName = "Level00";
 
 	public Memory ram;
-	public Application[] appList;
-	Application foregroundApp = null;
+	public ApplicationModel[] appList;
+	ApplicationModel foregroundApp = null;
 	bool gamePause = false;
 	bool gameStarted = false;
-	bool gameFinished = false;
+	public bool gameFinished = false;
 	int appIndex = 0;
 
 	void Awake(){
@@ -25,15 +27,20 @@ public class LevelManager : MonoBehaviour {
 
 	void Start(){
 		CanvasController.instance.startScreen.SetActive(true);
-		OpenApp(appList[appIndex]);
+		StartCoroutine(OpenApp(appList[appIndex]));
 		PauseGame(true);
 	}
 
-	void OpenApp(Application app){
+	IEnumerator OpenApp(ApplicationModel app, float delay = 0){
+		CanvasController.instance.messagePanel.AddMessage("Loading " + app.appName 
+		+ "(" + app.size + " Blocks)", true);
+		yield return new WaitForSeconds(delay);
 		foregroundApp = app;
 		gamePause = false;
 		CanvasController.instance.pcPanel.SetMainMemory(ram);
 		CanvasController.instance.pcPanel.SetActualApplication(foregroundApp);
+
+		yield return null;
 	}
 
 	void FixedUpdate(){
@@ -42,17 +49,18 @@ public class LevelManager : MonoBehaviour {
 
 	void Update(){
 		if(!gameStarted && Input.GetButtonDown("Jump")){
-			CanvasController.instance.startScreen.SetActive(false);
+			CanvasController.instance.StartLevel();
 			PauseGame(false);
 			gameStarted = true;
 		}
 
-		if(gameFinished && Input.GetButtonDown("Jump")){
-			RestartLevel();
+		if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)){
+			CanvasController.instance.pausePanel.SetActive(!gamePause);
+			PauseGame(!gamePause);
 		}
 	}
 
-	void PauseGame(bool pause){
+	public void PauseGame(bool pause){
 		gamePause = pause;
 		if(pause){
 			Time.timeScale = 0;
@@ -85,7 +93,7 @@ public class LevelManager : MonoBehaviour {
 		gamePause = true;
 		appIndex++;
 		if(appIndex < appList.Length){
-			OpenApp(appList[appIndex]);
+			StartCoroutine(OpenApp(appList[appIndex], 3f));
 		} else {
 			WinCondition();
 		}
@@ -105,8 +113,16 @@ public class LevelManager : MonoBehaviour {
 		gameFinished = true;
 	}
 
+	public void NextLevel(){
+		SceneManager.LoadScene(nextLevelName);
+	}
+
 	public void RestartLevel(){
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
+	public void MainMenu(){
+		SceneManager.LoadScene("MainMenu");
 	}
 
 }

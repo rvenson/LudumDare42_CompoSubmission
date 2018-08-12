@@ -16,7 +16,7 @@ public class PCPanelUI : MonoBehaviour {
 	public Slider actualUseSlider;
 	public Slider playerLifeSlider;
 
-	Application actualApplication;
+	ApplicationModel actualApplication;
 	Memory mainMemory;
 
 	public void Start(){
@@ -25,7 +25,7 @@ public class PCPanelUI : MonoBehaviour {
 		}
 	}
 
-	public void SetActualApplication(Application app){
+	public void SetActualApplication(ApplicationModel app){
 
 		actualApplication = app;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Application : MonoBehaviour {
+public class ApplicationModel : MonoBehaviour {
 
 	public string appName = "Unity";
 	public Sprite imageScreen;
