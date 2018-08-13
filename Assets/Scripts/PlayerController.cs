@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider other){
+	void OnTriggerStay(Collider other){
 		actualTrigger = other.gameObject;
 	}
 

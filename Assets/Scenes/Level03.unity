@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1526980366}
-  m_IndirectSpecularColor: {r: 0.18028454, g: 0.22571412, b: 0.30692196, a: 1}
+  m_IndirectSpecularColor: {r: 0.46169603, g: 0.5124164, b: 0.5899322, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -371,10 +371,10 @@ MonoBehaviour:
   colorName: Blue
   color: {r: 0.2589151, g: 0.2589151, b: 0.92182803, a: 1}
   size: 3
-  maxWaitTime: 45
-  maxUseTime: 10
-  waitTime: 45
-  useTime: 10
+  maxWaitTime: 50
+  maxUseTime: 15
+  waitTime: 50
+  useTime: 15
 --- !u!1 &138438770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,14 +1381,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c903cbc1f94f56b1c24c839bd268c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appName: Firefox
+  appName: firefox
   imageScreen: {fileID: 21300000, guid: 40e2b14255de540f49ee58b515c3569e, type: 3}
   colorName: Yellow
   color: {r: 0.8679245, g: 0.8190713, b: 0.1514774, a: 1}
   size: 4
-  maxWaitTime: 65
+  maxWaitTime: 70
   maxUseTime: 5
-  waitTime: 65
+  waitTime: 70
   useTime: 5
 --- !u!1 &385344129
 GameObject:
@@ -2559,7 +2559,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 1210890944469498, guid: 911f76c33deb04ede929a497accc037c, type: 2}
   spawnPosition: {fileID: 775989477}
-  delay: 80
+  delay: 110
 --- !u!4 &789512457 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: eec1d32201452407283abadb2a694b67, type: 3}
@@ -3525,6 +3525,116 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockLoaded: {fileID: 1180861862}
+--- !u!1 &1022238943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1022238944}
+  - component: {fileID: 1022238949}
+  - component: {fileID: 1022238948}
+  - component: {fileID: 1022238947}
+  - component: {fileID: 1022238946}
+  - component: {fileID: 1022238945}
+  m_Layer: 0
+  m_Name: Block
+  m_TagString: Block
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1022238944
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022238943}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 1865597741}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1022238945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022238943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc50e8db05f6481c8f82d5553615410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1022238946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022238943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c5fa9c61dc04116bc04a0fb5dc46c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appName: firefox
+--- !u!65 &1022238947
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022238943}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1022238948
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022238943}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 2100000, guid: 6b6bbb1fd8fec4fda901858530ba8759, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1022238949
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022238943}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1053444053
 Prefab:
   m_ObjectHideFlags: 0
@@ -4946,7 +5056,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 1210890944469498, guid: 911f76c33deb04ede929a497accc037c, type: 2}
   spawnPosition: {fileID: 1399686666}
-  delay: 50
+  delay: 70
 --- !u!4 &1399686666
 Transform:
   m_ObjectHideFlags: 0
@@ -7259,6 +7369,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1229877109}
+  - {fileID: 1022238944}
   m_Father: {fileID: 1874795946}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7285,7 +7396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3843e76637e4691b1c89079cdd4185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockLoaded: {fileID: 0}
+  blockLoaded: {fileID: 1022238946}
 --- !u!1001 &1870627063
 Prefab:
   m_ObjectHideFlags: 0
@@ -8104,9 +8215,9 @@ MonoBehaviour:
   colorName: Purple
   color: {r: 0.55300224, g: 0, b: 0.72935075, a: 1}
   size: 4
-  maxWaitTime: 50
+  maxWaitTime: 55
   maxUseTime: 15
-  waitTime: 50
+  waitTime: 55
   useTime: 15
 --- !u!1001 &2096176138
 Prefab:
