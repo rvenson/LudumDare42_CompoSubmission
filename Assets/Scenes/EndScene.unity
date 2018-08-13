@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028454, g: 0.22571412, b: 0.30692196, a: 1}
+  m_IndirectSpecularColor: {r: 0.46169603, g: 0.5124164, b: 0.5899322, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -244,7 +244,7 @@ Prefab:
     - target: {fileID: 224701711735156838, guid: f8cdd67195cd84f388e21e22e97ff349,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -61.866913
+      value: -61.86696
       objectReference: {fileID: 0}
     - target: {fileID: 224701711735156838, guid: f8cdd67195cd84f388e21e22e97ff349,
         type: 2}
@@ -582,10 +582,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4db0cd4d3037438fbf5ae481b0ac3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: Level00
-  nextLevelName: Level00
+  levelName: Tutorial
+  nextLevelName: MainMenu
   ram: {fileID: 0}
   appList: []
+  gamePause: 0
   gameFinished: 0
   dangerousZone: 0
   runApplication: 0

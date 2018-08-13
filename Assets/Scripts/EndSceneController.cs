@@ -8,6 +8,7 @@ public class EndSceneController : LevelManager {
 	public bool end = false;
 
 	void Start(){
+		PauseGame(false);
 		StartCoroutine(EndSceneSequence());	
 	}
 
